@@ -17,7 +17,7 @@ var config = {
 };
 
 var player;
-var stars;
+var crate;
 var platforms;
 var cursors;
 var score = 0;
@@ -30,7 +30,7 @@ function preload ()
     this.load.audio('1979', '../assets/1979.mp3')
     this.load.image('background', '../assets/background.png');
     this.load.image('ground', '../assets/ground.png');
-    this.load.image('star', '../assets/carrot.png');
+    this.load.image('star', '../assets/crate.png');
     //this.load.image('bomb', '../assets/bomb.png');
     this.load.spritesheet('dude', '../assets/dude.png', {frameWidth:28, frameHeight: 28});
 }
@@ -90,7 +90,7 @@ function create ()
 
     player = this.physics.add.sprite(100, 450, 'dude').setScale(2);
 
-    player.setBounce(0.2);
+    player.setBounce(0);
     player.setCollideWorldBounds(false);
 
     this.anims.create({
@@ -115,17 +115,24 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    stars = this.physics.add.group({
-        key: 'star',
-        repeat: 11,
-        setXY: { x: 12, y: 0, stepX: 70 }
-    });
+    crate = this.physics.add.group();
+    //    key: 'star',
+    //    repeat: 4,
+    //    setXY: { x: 1000, y: 50, stepy: 120 }
+   // });
 
-    stars.children.iterate(function (child) {
+    //crate.children.iterate(function (child) {
 
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      
 
-    });
+    //});
+  
+    crate.create(1300, 50, 'star').setScale(0.25);
+   // crate.create(1300, 150, 'star').setScale(0.25);
+    //crate.create(1300, 250, 'star').setScale(0.25);
+    crate.create(1300, 350, 'star').setScale(0.25);
+   
+    
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
@@ -134,11 +141,15 @@ function create ()
     this.physics.add.collider(player, floor);
     this.physics.add.collider(player, wall);
     this.physics.add.collider(player, wall2);
-    this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(stars, floor);
+    this.physics.add.collider(crate, platforms);
+    this.physics.add.collider(crate, floor);
+    this.physics.add.collider(player, crate);
+    this.physics.add.collider(crate, crate);
+
+   
 
     this.cameras.main.startFollow(player);
-    this.physics.add.overlap(player, stars, collectStar, null, this);
+    this.physics.add.overlap(player, crate, collectStar, null, this);
 }
 
 function update ()
@@ -154,6 +165,8 @@ function update ()
         player.setVelocityX(160);
 
         player.anims.play('right', true);
+
+       
     }
     else
     {
@@ -166,14 +179,19 @@ function update ()
     {
         player.setVelocityY(-500);
     }
+  
+    if(crate.velocityX > 0 && crate.velocityX < 0){
+        crate.setVelocityX(0)
+    }
 }
 
 
-function collectStar(player, carrot){
-    carrot.disableBody(true,true);
+function collectStar(player, crate){
+   
+    //carrot.disableBody(true,true);
     //this.cameras.main.shake(50);
-    score += 10;
-    scoreText.setText('Score: ' + score);
+    //score += 10;
+    //scoreText.setText('Score: ' + score);
     //x += 0.1
     //player.setScale(x);  
 }
