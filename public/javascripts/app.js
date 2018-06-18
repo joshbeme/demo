@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     physics: {
         default: 'arcade',
         arcade: {
@@ -9,13 +9,12 @@ var config = {
             debug: false
         }
     },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+    scene: [MainMenu, Demo]
 };
 
+
+var game = new Phaser.Game(config);
+/*
 var player;
 var crate;
 var platforms;
@@ -23,7 +22,6 @@ var cursors;
 var score = 0;
 var scoreText;
 
-var game = new Phaser.Game(config);
 
 function preload ()
 {
@@ -39,7 +37,7 @@ function create ()
 {
    
     this.soundFX = this.sound.add("1979", {loop:"true"});
-    this.soundFX.play();
+   // this.soundFX.play();
 
     this.add.image(400, 300, 'background');
 
@@ -115,22 +113,22 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    crate = this.physics.add.group();
-    //    key: 'star',
-    //    repeat: 4,
-    //    setXY: { x: 1000, y: 50, stepy: 120 }
-   // });
+    crate = this.physics.add.sprite(800, 50, 'star');
 
+    //crate.setScale(0.5);
+    //crate.setVelocityX(0);
+
+ 
     //crate.children.iterate(function (child) {
 
       
 
     //});
   
-    crate.create(1300, 50, 'star').setScale(0.25);
+    //crate.create(800, 50, 'star').setScale(0.25);
    // crate.create(1300, 150, 'star').setScale(0.25);
     //crate.create(1300, 250, 'star').setScale(0.25);
-    crate.create(1300, 350, 'star').setScale(0.25);
+    //crate.create(800, 350, 'star').setScale(0.25);
    
     
 
@@ -144,7 +142,7 @@ function create ()
     this.physics.add.collider(crate, platforms);
     this.physics.add.collider(crate, floor);
     this.physics.add.collider(player, crate);
-    this.physics.add.collider(crate, crate);
+    //this.physics.add.collider(crate);
 
    
 
@@ -179,10 +177,12 @@ function update ()
     {
         player.setVelocityY(-500);
     }
-  
-    if(crate.velocityX > 0 && crate.velocityX < 0){
-        crate.setVelocityX(0)
-    }
+    //crate.setGravityY();
+    crate.setVelocityX(0);
+    
+    //if(crate.body.velocityX > 0 && crate.body.velocityX < 0){
+    //    crate.setVelocityX(0)
+    //}
 }
 
 
@@ -194,4 +194,4 @@ function collectStar(player, crate){
     //scoreText.setText('Score: ' + score);
     //x += 0.1
     //player.setScale(x);  
-}
+}*/
