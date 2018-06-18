@@ -167,6 +167,7 @@ class Demo extends Phaser.Scene{
         //crate.setGravityY();
         
         this.crate.setVelocityX(0);
+        this.crate.setMass(5000);
         
         
         //if(crate.body.velocityX > 0 && crate.body.velocityX < 0){
