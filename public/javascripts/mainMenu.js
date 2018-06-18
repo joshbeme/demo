@@ -10,8 +10,11 @@ class MainMenu extends Phaser.Scene {
     }
     preload(){
         this.load.audio('MCIS', '../assets/MCIS.mp3');
+        this.load.image('back', '../assets/cave.jpg');
     }
     create(){
+        this.back = this.add.image(630, 350, 'back');
+
         this.music = this.sound.add("MCIS", {loop:"true"});
         this.music.play();
 
@@ -24,6 +27,7 @@ class MainMenu extends Phaser.Scene {
             if (this.select === 'start' ){
                 this.scene.start("Demo")
                 this.music.pause();
+                //this.back.setVisible(false);
             }
             else {
                 null
