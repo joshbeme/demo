@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene{
 
     }
     preload(){
-        this.load.audio('1979', '../assets/1979.mp3');
+        this.load.audio('1979', '../assets/GoodTimes.mp3');
         this.load.image('background', '../assets/background.png');
         this.load.image('ground', '../assets/ground.png');
         this.load.image('star', '../assets/crate.png');

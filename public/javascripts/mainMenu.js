@@ -10,7 +10,7 @@ class MainMenu extends Phaser.Scene {
       
     }
     preload(){
-        this.load.audio('MCIS', '../assets/MCIS.mp3');
+        this.load.audio('MCIS', '../assets/InTheLight.mp3');
         this.load.image('back', '../assets/cave.jpg');
     }
     create(){
