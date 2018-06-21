@@ -7,6 +7,7 @@ class MainMenu extends Phaser.Scene {
         this.options
         this.credits
         this.key_enter
+      
     }
     preload(){
         this.load.audio('MCIS', '../assets/MCIS.mp3');
@@ -27,46 +28,42 @@ class MainMenu extends Phaser.Scene {
             if (this.select === 'start' ){
                 this.scene.start("Demo")
                 this.music.pause();
-                //this.back.setVisible(false);
             }
             else {
                 null
             }
-        }, this);
+        }, this);//Change Scene
+
         this.input.keyboard.on('keyup_DOWN', function(event){
             if (this.select === 'start' && this.select != 'credits')
             {
-                //this.start.setColor("White");
                 this.select = 'options'
             }
             else if (this.select === 'options' && this.select != 'start')
             {
-                //this.options.setColor("White");
                 this.select = 'credits'
             }
             else if (this.select === 'credits' && this.select != 'options')
             {
-                //this.options.setColor("White");
                 this.select = 'start'
             }
-        }, this);
+        }, this);//cycle down
+
         this.input.keyboard.on('keyup_UP', function(event){
             if (this.select === 'start' && this.select != 'credits')
             {
-                //this.start.setColor("White");
                 this.select = 'credits'
             }
             else if (this.select === 'options' && this.select != 'start')
             {
-                //this.options.setColor("White");
                 this.select = 'start'
             }
             else if (this.select === 'credits' && this.select != 'options')
             {
-                //this.options.setColor("White");
                 this.select = 'options'
             }
-        }, this);
+        }, this);//cycle up
+        
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 

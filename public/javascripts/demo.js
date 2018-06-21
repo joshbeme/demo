@@ -5,7 +5,7 @@ class Demo extends Phaser.Scene{
         this.crate;
         this.platforms;
         this.cursors;
-       // this.score = 0;
+        this.backgroundMask;
         //this.scoreText;
        // this.floor;
         //this.wall;
@@ -13,6 +13,12 @@ class Demo extends Phaser.Scene{
         //this.wall3;
         //this.soundFX;
         //this.ceiling;
+          this.quad = {
+            topLeftX: -50, topLeftY: -100,
+            topRightX: 3600, topRightY: -100,
+            bottomLeftX: -50, bottomLeftY: 600,
+            bottomRightX: 3600, bottomRightY: 600
+        }
 
     }
     preload(){
@@ -28,11 +34,47 @@ class Demo extends Phaser.Scene{
         this.soundFX = this.sound.add("1979", {loop:"true"});
    this.soundFX.play();
 
-    this.add.image(400, 300, 'background');
+   this.backgroundImg = this.make.image({
+        key: 'background', 
+    
+        x: 400, y: 500
+       });
+       this.backgroundImg2 = this.make.image({
+        key: 'background', 
+    
+        x: 2000, y: 500
+       });
+    //this.backgroundImg2
+    //this.backgroundMask = this.make.sprite({
+    //	x: 0,
+    //	y: 3000,
+    //	key: 'phaser2',
+   // 	add: false
+ //   });
+
+    this.mesh = this.make.mesh({
+        key: 'star',
+        x: 0,
+        y: 0,
+        vertices: [
+            this.quad.topLeftX, this.quad.topLeftY,
+            this.quad.bottomLeftX, this.quad.bottomLeftY,
+            this.quad.bottomRightX, this.quad.bottomRightY,
+
+            this.quad.topLeftX, this.quad.topLeftY,
+            this.quad.bottomRightX, this.quad.bottomRightY,
+            this.quad.topRightX, this.quad.topRightY
+        ],
+        uv: [ 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0 ],
+        add: false
+    });
+
+    this.backgroundImg.mask = new Phaser.Display.Masks.GeometryMask(this, this.mesh);
+    this.backgroundImg2.mask = new Phaser.Display.Masks.GeometryMask(this, this.mesh);
 
     this.wall = this.physics.add.staticGroup({
         key: 'ground',
-        repeat: 8,
+        repeat: 5,
         setXY: { x: -67, y: 550, stepY: -127 },
         
        
@@ -48,17 +90,17 @@ class Demo extends Phaser.Scene{
     this.wall2 = this.physics.add.staticGroup({
         key: 'ground',
         repeat: 8,
-        setXY: { x: 3000, y: 550, stepY: -127 },
+        setXY: { x: 2900, y: 550, stepY: -127 },
         
        
     }); 
-    this.wall3 = this.physics.add.staticGroup({
-        key: 'ground',
-        repeat: 8,
-        setXY: { x: 3000, y: 550, stepY: -127 },
-        
+   // this.wall3 = this.physics.add.staticGroup({
+   //     key: 'ground',
+  //      repeat: 8,
+   //     setXY: { x: 3000, y: 550, stepY: -127 },
+  //      
        
-    }); 
+   // }); 
     
     this.ceiling = this.physics.add.staticGroup({
         key: 'ground',
@@ -102,7 +144,7 @@ class Demo extends Phaser.Scene{
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.crate = this.physics.add.sprite(800, 50, 'star').setScale(0.4);
+    this.crate = this.physics.add.image(1300, 50, 'star').setScale(0.3);
 
     //crate.setScale(0.5);
     //crate.setVelocityX(0);
@@ -135,19 +177,19 @@ class Demo extends Phaser.Scene{
 
    
 
-    this.cameras.main.startFollow(this.player);
+    
     //this.physics.add.overlap(player, crate, collectStar, null, this);
     }
     update(){
         if (this.cursors.left.isDown)
         {
-            this.player.setVelocityX(-160);
+            this.player.setVelocityX(-400);
     
             this.player.anims.play('left', true);
         }
         else if (this.cursors.right.isDown)
         {
-            this.player.setVelocityX(160);
+            this.player.setVelocityX(400);
     
             this.player.anims.play('right', true);
     
@@ -168,8 +210,8 @@ class Demo extends Phaser.Scene{
         
         this.crate.setVelocityX(0);
         this.crate.setMass(5000);
-        
-        
+     
+        this.cameras.main.startFollow(this.player);
         //if(crate.body.velocityX > 0 && crate.body.velocityX < 0){
         //    crate.setVelocityX(0)
         //}
