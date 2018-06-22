@@ -148,8 +148,8 @@ class Demo extends Phaser.Scene{
     this.crate = this.physics.add.staticGroup();    
 
 
-        this.crate.create(2000, 180, 'star').setScale(0.4).refreshBody();
-        this.crate.create(2000, 384, 'star').setScale(0.4).refreshBody();
+        this.crate.create(2150, 180, 'star').setScale(0.4).refreshBody();
+        this.crate.create(2150, 384, 'star').setScale(0.4).refreshBody();
         this.crate.create(1200, 345, 'star').setScale(0.55).refreshBody();
     //crate.setScale(0.5);
     //crate.setVelocityX(0);
