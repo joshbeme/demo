@@ -110,11 +110,11 @@ class Demo extends Phaser.Scene{
         this.platforms = this.physics.add.staticGroup();    
 
 
-        this.platforms.create(600, 460, 'ground');
-        this.platforms.create(50, 250, 'ground')
-        this.platforms.create(220, 220, 'ground').setScale(0.5).refreshBody();
-        this.platforms.create(400, 280, 'ground').setScale(0.5).refreshBody();
-        this.platforms.create(580, 70, 'ground').setScale(0.4).refreshBody();
+        this.platforms.create(800, 460, 'ground');
+        //this.platforms.create(50, 250, 'ground')
+        this.platforms.create(320, 220, 'ground').setScale(0.5).refreshBody();
+        this.platforms.create(500, 280, 'ground').setScale(0.5).refreshBody();
+        this.platforms.create(670, 90, 'ground').setScale(0.4).refreshBody();
     
 
         this.player = this.physics.add.sprite(100, 450, 'dude').setScale(2);
@@ -144,8 +144,13 @@ class Demo extends Phaser.Scene{
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.crate = this.physics.add.image(1300, 50, 'star').setScale(0.3);
+   // this.crate = this.physics.add.image(1300, 50, 'star').setScale(0.3);
+    this.crate = this.physics.add.staticGroup();    
 
+
+        this.crate.create(2000, 180, 'star').setScale(0.4).refreshBody();
+        this.crate.create(2000, 384, 'star').setScale(0.4).refreshBody();
+        this.crate.create(1200, 345, 'star').setScale(0.55).refreshBody();
     //crate.setScale(0.5);
     //crate.setVelocityX(0);
 
@@ -208,8 +213,8 @@ class Demo extends Phaser.Scene{
         }
         //crate.setGravityY();
         
-        this.crate.setVelocityX(0);
-        this.crate.setMass(5000);
+        //this.crate.setVelocityX(0);
+      //  this.crate.setMass(5000);
      
         this.cameras.main.startFollow(this.player);
         //if(crate.body.velocityX > 0 && crate.body.velocityX < 0){
